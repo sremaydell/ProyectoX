@@ -1,10 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ProyectoX.Web",
-    "\\ProyectoX.Web\\bin\\Release\\net6.0",
-    "\\ProyectoX.Web\\wwwroot\\js"
+    "\\ProyectoX.Web"
   ],
-  "SelectedNode": "\\ProyectoX.Web.sln",
+  "SelectedNode": "\\ProyectoX.Web\\ProyectoX.Web.csproj",
   "PreviewInSolutionExplorer": false
 }
