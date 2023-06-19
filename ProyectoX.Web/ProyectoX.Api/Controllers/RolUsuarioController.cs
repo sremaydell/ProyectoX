@@ -21,7 +21,11 @@ namespace ProyectoX.Api.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
+<<<<<<< Updated upstream
             return Ok();
+=======
+            return "value";
+>>>>>>> Stashed changes
         }
 
         
