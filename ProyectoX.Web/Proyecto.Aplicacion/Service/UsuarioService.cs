@@ -7,7 +7,23 @@ namespace ProyectoX.Aplicacion.Service
         
         public UsuarioService(IUsuarioRepository usuarioRepository,
          ILogger<UsuarioService> logger);
-         public ServiceResult Get();
+         public ServiceResult Get(){
+
+         
+          ServiceResult result = new ServiceResult();
+        try
+        {
+            var Usuario = this.usuarioRepository.GetUsuario();
+         result.Data = Usuario;
+        }   
+        catch (Exception ex)
+        {
+            result.Success = false;
+            result.Message = "Error obteniendo los Usuario";
+            this.looger.LogError("", ex.ToString());
+        }
+        return result;
+    }
          public ServiceResult GetById(int id){
 
             ServiceResult result = new ServiceResult();

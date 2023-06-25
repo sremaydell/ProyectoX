@@ -21,13 +21,23 @@ using Microsoft.AspNetCore.Mvc;
         }
         [HttpGet("{id}")]
 
-        public IActionResult get(int id){
+        public IActionResult Get(int id){
             var Usu = this.UsuarioRepository.GetUsuarioById(id);
+            try
+            {
+                Usu = this.usuarioRepositoy.GetUsuario(id);
+            }
+            catch (UsuarioException ex)
+            {
+                var result = new {Success = false, ErrorMessage = ex.Message};
+                return BadRequest(result);
+            }
             return Ok(Usu);
         }
         [HttpPost("Save")]
         public IActionResult Post([FromBody] UsuarioAdd usuarioAdd)
         {
+            var result = this.UsuarioService.Save(usuarioAdd)
             this.UsuarioRepository.Add(new UsuarioControllers()
             {
                 NombreCompleto = usuarioAdd.NombreCompleto,

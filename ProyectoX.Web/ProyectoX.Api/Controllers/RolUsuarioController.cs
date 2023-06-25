@@ -1,3 +1,4 @@
+using System.Runtime.Intrinsics.X86;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -14,35 +15,45 @@ namespace ProyectoX.Api.Controllers
         [HttpGet("GetRolUsuario")]
         public IActionResult Get()
         {
-            return Ok();
-        }
+            var result = this.rolusuarioService.Get();
 
+            if (!result.Success)
+                return BadRequest(result);
+            
+
+            return Ok(RolUsuario);
+        }
+        
         
         [HttpGet("{id}")]
         public string Get(int id)
         {
-<<<<<<< Updated upstream
-            return Ok();
-=======
-            return "value";
->>>>>>> Stashed changes
-        }
 
-        
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
+            return Ok();
+
+            return "value";
         }
 
       
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{Update}")]
+        public void Put( [FromBody] RolUsuario rolUsuario)
         {
+            this.rolusuarioRepository.Update(rolUsuario);
+            return Ok();
         }
+        
 
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{Remove}")]
+        public void Delete([FromBody] RolUsuarioRemove rolusuarioRemove)
         {
+            
+                RolUsuario RolusuarioToDelete = new RolUsuario(){
+                    Eliminado = rolusuarioRemove.Eliminado,
+                    Estado = rolusuarioRemove.Estado,
+                    FechaCreacion = rolusuarioRemove.FechaCreacion
+                };
+                this.rolusuarioReopository.Remove(rolusuarioToDelete);
+                return Ok();
         }
     }
 }
